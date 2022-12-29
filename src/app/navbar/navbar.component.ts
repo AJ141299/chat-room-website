@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   changeTheme() {
-    const currentTheme: string | null =
-      window.localStorage.getItem('theme')
+    document.querySelector('body')?.classList.add('bg-color-transition');
+    const currentTheme: string | null = window.localStorage.getItem('theme')
       ?? document.documentElement.getAttribute("data-theme");
     
     if (currentTheme == 'dark') {

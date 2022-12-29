@@ -19,6 +19,10 @@
     margin: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    
+}
+
+.bg-color-transition {
     transition: background-color 350ms ease;
 }
 
