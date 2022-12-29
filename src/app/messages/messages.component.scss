@@ -1,0 +1,12 @@
+.messages {
+    background-color: var(--element-color);
+    height: 80vh;
+    width: 100%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-input {
+    margin-top: auto;
+}

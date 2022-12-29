@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --bg-color: hsla(205,21%,14%,1.0);
-    --element-color: hsla(205,21%,30%,1.0);
+    --bg-color: hsla(230,15%,10%,1.0);
+    --element-color: hsla(232,14%,14%,1.0);
 
-    --text-color: hsla(47,11%,90%,1.0);
+    --text-primary-color: hsla(0,0%,90%,1.0);
+    --text-secondary-color: hsla(0,0%,70%,1.0);
+    --text-tertiary-color: hsla(0,0%,50%,1.0);
+    --text-quaternary-color: hsla(0,0%,40%,1.0);
     
     --logo-gradient-left: hsla(200,52%,46%,1.0);
-    --logo-gradient-right: hsla(161,30%,78%,1.0);
+    --logo-gradient-right: rgb(98, 219, 183);
 }
 
 [data-theme="light"] {
@@ -47,7 +50,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-button {
+button, input {
     background-color: transparent;
     border: 0;
 }
@@ -56,5 +59,5 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    height: 100vh;
+    color: var(--text-primary-color);
 }
