@@ -3,6 +3,7 @@
 :root {
     --bg-color: hsla(230,15%,10%,1.0);
     --element-color: hsla(232,14%,14%,1.0);
+    --shadow-color: hsla(230,15%,8%,1.0);
 
     --text-primary-color: hsla(0,0%,90%,1.0);
     --text-secondary-color: hsla(0,0%,70%,1.0);
@@ -15,6 +16,13 @@
 
 [data-theme="light"] {
     --bg-color: white;
+    --element-color: hsla(0,0%,90%,1.0);
+    --shadow-color: hsla(0,0%,80%,1.0);
+
+    --text-primary-color: hsla(0,0%,10%,1.0);
+    --text-secondary-color: hsla(0,0%,25%,1.0);
+    --text-tertiary-color: hsla(0,0%,35%,1.0);
+    --text-quaternary-color: hsla(0,0%,50%,1.0);
 }
 
 * {
