@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./message-input.component.scss']
 })
 export class MessageInputComponent {
-
+  sendMessage() {
+    console.log("Sending message")
+  }
 }
