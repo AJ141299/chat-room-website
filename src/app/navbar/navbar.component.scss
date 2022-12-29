@@ -1,0 +1,28 @@
+.nav {
+    width: full;
+    padding: 20px 0;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+}
+
+.nav-item {
+    margin: auto 0;
+}
+
+.logo-header {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 800;
+    background-image: linear-gradient(to right, var(--logo-gradient-left), var(--logo-gradient-right));
+    background-clip: text;
+    color: transparent;
+}
+
+.theme-btn {
+    color: pink;
+    cursor: pointer;
+}
