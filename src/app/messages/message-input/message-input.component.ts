@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { SignalRService } from 'src/app/signalr.service';
 import { sendMessage } from 'src/app/state/actions/ui.actions';
 import { AppState, Message } from 'src/app/state/models/models';
+import { selectUsername } from 'src/app/state/selectors/user.selectors';
 
 @Component({
   selector: 'message-input',
@@ -12,12 +13,17 @@ import { AppState, Message } from 'src/app/state/models/models';
 })
 export class MessageInputComponent {
   messageControl: FormControl = new FormControl();
+  currentUsername: string = 'Johnny Sins';
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) {
+    this.store.select(selectUsername).pipe().subscribe((username: string) => {
+      this.currentUsername = username;
+    })
+  }
 
   sendMessage() {
     const message: Message = {
-      username: Math.random().toString(),
+      username: this.currentUsername,
       content: this.messageControl.getRawValue(),
       createdAt: new Date().toUTCString()
     }

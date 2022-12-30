@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="sub-container">
+    <input (keyup.enter)="setUsername()" placeholder="Enter a username..." [formControl]="username" type="text">
+    <button (click)="setUsername()" class="submit">Submit</button>
+  </div>
+</div>

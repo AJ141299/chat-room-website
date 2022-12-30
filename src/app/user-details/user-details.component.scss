@@ -1,0 +1,23 @@
+input {
+  color: var(--text-primary-color);
+}
+
+button {
+  cursor: pointer;
+  color: var(--text-primary-color);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+
+}
+
+.sub-container {
+  border: 1px;
+  border-style: solid;
+  border-color: var(--text-secondary-color);
+  border-radius: 5px;
+  padding: 10px 10px;
+}
+

@@ -12,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from './state/app.state';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { reducers, effects } from './state/app.state';
     MessageInputComponent,
     MessageComponent,
     NavbarComponent,
-    MessagesComponent
+    MessagesComponent,
+    UserDetailsComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
