@@ -1,18 +1,19 @@
 .container {
-    width: 100%;
-    padding: 20px 20px;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 input {
-    color: var(--text-primary-color);
+  color: var(--text-primary-color);
+  width: 100%;
 }
 
 .send-btn {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    color: var(--text-primary-color);
-    transform: rotate(-45deg);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  color: var(--text-primary-color);
+  transform: rotate(-45deg);
 }

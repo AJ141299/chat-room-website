@@ -1,6 +1,6 @@
 <div class="container">
     <div class="messages">
-      <message [message]="message" *ngFor="let message of messages$ | async"></message>
+      <message @fade [message]="message" *ngFor="let message of messages$ | async"></message>
     </div>
     <div class="message-input">
         <message-input></message-input>
