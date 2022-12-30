@@ -1,4 +1,4 @@
-.messages {
+.container {
     background-color: var(--element-color);
     height: 80vh;
     width: 100%;
@@ -6,6 +6,12 @@
     display: flex;
     flex-direction: column;
     box-shadow: 1px 1px 4px var(--shadow-color);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 25px;
 }
 
 .message-input {

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+.heading {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.username {
+  font-weight: 700;
+}
+
+.date-time {
+  color: var(--text-secondary-color);
+  font-size: 0.8em;
+}
