@@ -37,5 +37,7 @@ export class AppComponent {
         this.store.dispatch(receiveMessage(message));
       })
     });
+
+    console.log(this.signalRService.connection.state)
   }
 }

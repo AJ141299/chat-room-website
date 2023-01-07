@@ -7,7 +7,7 @@ export class SignalRService {
   constructor() {}
 
   public connection: signalR.HubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("https://localhost:7255/chatHub")
+    .withUrl("https://chat-room-server.herokuapp.com:3232/chatHub")
     .withAutomaticReconnect()
     .build();
 
