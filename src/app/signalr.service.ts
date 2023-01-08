@@ -43,10 +43,8 @@ export class SignalRService {
 
     this.connection.on('UserIsTyping', (typingStatus: TypingStatus) => {
       if (typingStatus.isTyping) {
-        console.log("Adding typing")
         this.store.dispatch(addTypingUser(typingStatus));
       } else {
-        console.log("Removing typing")
         this.store.dispatch(removeTypingUser(typingStatus));
       }
     })
