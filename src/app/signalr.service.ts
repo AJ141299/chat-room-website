@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { Store } from "@ngrx/store";
 import { first, tap } from "rxjs";
-import { addJoiningUser, addTypingUser, receiveMessage, removeJoiningUser, removeTypingUser } from "./state/actions/ui.actions";
+import { addJoiningUser, addTypingUser, receiveMessage, removeJoiningUser, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
 import { Message, AppState, TypingStatus } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
 
@@ -14,6 +14,17 @@ export class SignalRService {
     .withUrl("https://chat-room-server20230107234625.azurewebsites.net:443/chatHub")
     .withAutomaticReconnect()
     .build();
+
+  public async start() {
+    return this.connection.start();
+  }
+
+  public configure() {
+    this.configureMessageReceival()
+    this.configureUserTyping();
+    this.configureJoiningUsers();
+    this.configureConnectedCount();
+  }
 
   public sendMessage(message: Message) {
     this.connection.invoke("SendMessage", message);
@@ -36,14 +47,8 @@ export class SignalRService {
     this.connection.invoke("AnnounceUser", username);
   }
 
-  public async start() {
-    return this.connection.start();
-  }
-
-  public configure() {
-    this.configureMessageReceival()
-    this.configureUserTyping();
-    this.configureJoiningUsers();
+  public incrementConnectedCount() {
+    this.connection.invoke("IncrementConnectedCount");
   }
 
   private configureMessageReceival() {
@@ -68,6 +73,12 @@ export class SignalRService {
       setTimeout(() => {
         this.store.dispatch(removeJoiningUser({username: username}));
       }, 2000)
+    });
+  }
+
+  private configureConnectedCount() {
+    this.connection.on('RefreshConnectedCount', (count: number) => {
+      this.store.dispatch(setConnectedCount({count: count}));
     });
   }
 }

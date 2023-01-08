@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/models/models';
-import { selectAllMessages, selectJoiningUsers, selectTypingUsers } from '../state/selectors/ui.selectors';
+import { selectAllMessages, selectConnectedCount, selectJoiningUsers, selectTypingUsers } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { SignalRService } from '../signalr.service';
 import { first, tap } from 'rxjs';
@@ -44,12 +44,14 @@ export class MessagesComponent {
   messages$ = this.store.select(selectAllMessages);
   typingUsers$ = this.store.select(selectTypingUsers);
   currentUsername$ = this.store.select(selectUsername);
+  usersCount$ = this.store.select(selectConnectedCount);
   joiningUsers$ = this.store.select(selectJoiningUsers);
   joiningUser: string | null;
 
   constructor(private store: Store<AppState>, private signalRService: SignalRService) { }
 
   ngOnInit() {
+    this.signalRService.incrementConnectedCount();
     this.currentUsername$.subscribe((username: string) => {
       this.signalRService.announceJoin(username);
     });

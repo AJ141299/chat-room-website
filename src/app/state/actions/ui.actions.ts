@@ -35,3 +35,8 @@ export const removeJoiningUser = createAction(
   '[User details page] Remove joining user',
   props<{username: string}>()
 );
+
+export const setConnectedCount = createAction(
+  '[Messages page] Set connected users count',
+  props<{count: number}>()
+);

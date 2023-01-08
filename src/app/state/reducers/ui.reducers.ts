@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { addJoiningUser, addTypingUser, receiveMessage, removeJoiningUser, removeTypingUser, sendMessage, setTheme } from "../actions/ui.actions";
+import { addJoiningUser, addTypingUser, receiveMessage, removeJoiningUser, removeTypingUser, sendMessage, setConnectedCount, setTheme } from "../actions/ui.actions";
 import { Message, TypingStatus, UiState } from "../models/models";
 
 export const initialState: UiState = {
@@ -8,6 +8,7 @@ export const initialState: UiState = {
   recentlySentMessage: { username: '', content: '', createdAt: '' },
   typingUsers: [],
   joiningUsers: [],
+  connectedCount: 0,
 };
 
 export const uiReducer = createReducer(
@@ -42,5 +43,9 @@ export const uiReducer = createReducer(
   on(removeJoiningUser, (state, {username}) => ({
     ...state,
     joiningUsers: state.joiningUsers.filter((user) => {user != username})
+  })),
+  on(setConnectedCount, (state, {count}) => ({
+    ...state,
+    connectedCount: count
   })),
 );

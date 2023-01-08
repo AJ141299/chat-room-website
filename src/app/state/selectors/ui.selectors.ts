@@ -27,3 +27,8 @@ export const selectJoiningUsers = createSelector(
   selectUiState,
   (state: UiState) => state.joiningUsers
 );
+
+export const selectConnectedCount = createSelector(
+  selectUiState,
+  (state: UiState) => state.connectedCount
+);
