@@ -32,11 +32,13 @@ export class MessageInputComponent {
     const message: Message = {
       username: this.currentUsername,
       content: this.messageControl.getRawValue(),
-      createdAt: new Date().toUTCString()
+      createdAt: new Date().getTime() // UTC
     }
     if (message.content == null || message.content == '' ||  message.content == undefined) {
       return;
     }
+
+    console.log(message.createdAt);
 
     this.signalRService.sendTypingStatus(false);
     this.store.dispatch(sendMessage(message));

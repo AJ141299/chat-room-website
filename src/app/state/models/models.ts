@@ -19,7 +19,7 @@ export interface UiState {
 export interface Message {
   username: string;
   content: string;
-  createdAt: string;
+  createdAt: number;
 }
 
 export interface TypingStatus {
