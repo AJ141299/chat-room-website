@@ -38,7 +38,8 @@ export class MessageInputComponent {
       return;
     }
 
-    this.store.dispatch(sendMessage(message))
+    this.signalRService.sendTypingStatus(false);
+    this.store.dispatch(sendMessage(message));
     this.messageControl.reset();
   }
 
