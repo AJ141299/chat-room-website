@@ -6,12 +6,15 @@ import { addJoiningUser, addTypingUser, receiveMessage, removeJoiningUser, remov
 import { Message, AppState, TypingStatus } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
 
+const devSignalRUrl: string = "https://localhost:3232/chatHub";
+const prodSignalRUrl: string = "https://chat-room-server20230107234625.azurewebsites.net:443/chatHub";
+
 @Injectable({providedIn: "root"})
 export class SignalRService {
   constructor(private store: Store<AppState>) {}
 
   public connection: signalR.HubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("https://chat-room-server20230107234625.azurewebsites.net:443/chatHub")
+    .withUrl(devSignalRUrl)
     .withAutomaticReconnect()
     .build();
 
