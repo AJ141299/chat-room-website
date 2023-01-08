@@ -8,6 +8,7 @@ export interface UserState {
 }
 
 export interface UiState {
+  theme: string;
   messages: Message[];
   recentlySentMessage: Message;
 }

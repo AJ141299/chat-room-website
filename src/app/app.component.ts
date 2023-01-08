@@ -1,20 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { getOSTheme } from 'src/utilities/helpers';
 import { SignalRService } from './signalr.service';
-import { receiveMessage } from './state/actions/ui.actions';
+import { receiveMessage, setTheme } from './state/actions/ui.actions';
 import { AppState, Message } from './state/models/models';
-
-const setThemeFromOS = () => {
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute("data-theme", "dark")
-  } else {
-    document.documentElement.setAttribute("data-theme", "light")
-  }
-}
-
-const setThemeFromStorage = (localTheme: string) => {
-  document.documentElement.setAttribute("data-theme", localTheme);
-}
 
 @Component({
   selector: 'app-root',
@@ -27,8 +16,7 @@ export class AppComponent {
   constructor(private signalRService: SignalRService, private store: Store<AppState>) {}
 
   ngOnInit() {
-    const localTheme: string | null = window.localStorage.getItem('theme')
-    localTheme ? setThemeFromStorage(localTheme) : setThemeFromOS();
+    this.loadTheme()
 
     this.signalRService.connection.start().then(() => {
       console.log("Connected!!")
@@ -37,7 +25,10 @@ export class AppComponent {
         this.store.dispatch(receiveMessage(message));
       })
     });
+  }
 
-    console.log(this.signalRService.connection.state)
+  loadTheme() {
+    const theme = window.localStorage.getItem('theme') ?? getOSTheme();
+    this.store.dispatch(setTheme({theme: theme}))
   }
 }

@@ -12,3 +12,8 @@ export const selectRecentlySentMessage = createSelector(
   selectUiState,
   (state: UiState) => state.recentlySentMessage
 );
+
+export const selectTheme = createSelector(
+  selectUiState,
+  (state: UiState) => state.theme
+);

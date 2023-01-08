@@ -1,23 +1,30 @@
 input {
   color: var(--text-primary-color);
+  padding: 10px 10px;
 }
 
 button {
+  font-weight: 600;
   cursor: pointer;
   color: var(--text-primary-color);
+  padding: 10px 10px;
+  transition: all 150ms ease-out;
+}
+
+button:hover {
+  background-color: var(--text-secondary-color);
+  color: var(--shadow-color);
 }
 
 .container {
   display: flex;
   justify-content: center;
-
 }
 
 .sub-container {
-  border: 1px;
+  border: 2px;
   border-style: solid;
   border-color: var(--text-secondary-color);
   border-radius: 5px;
-  padding: 10px 10px;
 }
 

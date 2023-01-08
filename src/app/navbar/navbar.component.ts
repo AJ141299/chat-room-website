@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { first, Observable, tap } from 'rxjs';
+import { setTheme } from '../state/actions/ui.actions';
+import { AppState } from '../state/models/models';
+import { selectTheme } from '../state/selectors/ui.selectors';
 
 @Component({
   selector: 'navbar',
@@ -6,16 +11,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  currentTheme$: Observable<string> = this.store.select(selectTheme);
+
+  constructor(private store: Store<AppState>) {}
+
   changeTheme() {
-    const currentTheme: string | null = window.localStorage.getItem('theme')
-      ?? document.documentElement.getAttribute("data-theme");
-    
-    if (currentTheme == 'dark') {
-      document.documentElement.setAttribute("data-theme", "light");
-      window.localStorage.setItem('theme', 'light')
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-      window.localStorage.setItem('theme', 'dark')
-    }
+    this.currentTheme$.pipe(
+      first(),
+      tap((theme: string) => {
+        const newTheme = theme == "dark" ? "light" : "dark";
+        this.store.dispatch(setTheme({theme: newTheme}))
+      })
+    ).subscribe();
   }
 }

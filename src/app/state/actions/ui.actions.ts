@@ -10,3 +10,8 @@ export const receiveMessage = createAction(
   '[Messages page] Receive Message',
   props<Message>()
 );
+
+export const setTheme = createAction(
+  '[All pages] Set Theme',
+  props<{theme: string}>()
+);

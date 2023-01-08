@@ -2,14 +2,15 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { tap, withLatestFrom } from "rxjs";
-import { sendMessage } from "../actions/ui.actions";
+import { sendMessage, setTheme } from "../actions/ui.actions";
 import { AppState } from "../models/models";
 import { SignalRService } from "src/app/signalr.service";
-import { selectRecentlySentMessage } from "../selectors/ui.selectors";
+import { selectRecentlySentMessage, selectTheme } from "../selectors/ui.selectors";
 
 @Injectable()
 export class UiEffects {
     recentlySentMessages$ = this.store.select(selectRecentlySentMessage);
+    theme$ = this.store.select(selectTheme);
 
     constructor(
         private actions$: Actions,
@@ -25,6 +26,20 @@ export class UiEffects {
             withLatestFrom(this.recentlySentMessages$),
             tap(([_, recentlySentMessage]) => {
                 this.signalRService.sendMessage(recentlySentMessage);
+            })
+        ),
+        {dispatch: false}
+    );
+
+    setTheme$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(
+                setTheme
+            ),
+            withLatestFrom(this.theme$),
+            tap(([_, theme]) => {
+              document.documentElement.setAttribute("data-theme", theme);
+              window.localStorage.setItem('theme', theme);
             })
         ),
         {dispatch: false}
