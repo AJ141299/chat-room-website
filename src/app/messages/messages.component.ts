@@ -9,10 +9,20 @@ import { trigger, style, animate, transition } from '@angular/animations';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
   animations: [
-    trigger('fade', [
+    trigger('fadeDown', [
       transition(':enter', [
         style({ opacity: 0, transform: "translateY(-10%)" }),
         animate('200ms', style({ opacity: 1, transform: "translateY(0%)" }))
+      ])
+    ]),
+    trigger('easeOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('100ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('150ms', style({ opacity: 0 }))
       ])
     ]),
   ],
