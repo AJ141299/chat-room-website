@@ -1,11 +1,11 @@
 .container {
-    background-color: var(--element-color);
-    height: 80vh;
-    width: 100%;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 1px 1px 4px var(--shadow-color);
+  background-color: var(--element-color);
+  height: 80vh;
+  width: 100%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 4px var(--shadow-color);
 }
 
 .messages {
@@ -15,8 +15,18 @@
   overflow: auto;
 }
 
-.message-input {
-    margin-top: auto;
+.messages-footer {
+  margin-top: auto;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-typing {
+  color: #555;
+  font-style: italic;
+  font-size: 13px;
+  margin-bottom: 15px;
 }
 
 /* width */

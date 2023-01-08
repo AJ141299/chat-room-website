@@ -1,10 +1,14 @@
 import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
-import { Message } from "./state/models/models";
+import { Store } from "@ngrx/store";
+import { first, tap } from "rxjs";
+import { receiveMessage } from "./state/actions/ui.actions";
+import { Message, AppState, TypingStatus } from "./state/models/models";
+import { selectUsername } from "./state/selectors/user.selectors";
 
 @Injectable({providedIn: "root"})
 export class SignalRService {
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
   public connection: signalR.HubConnection = new signalR.HubConnectionBuilder()
     .withUrl("https://chat-room-server20230107234625.azurewebsites.net:443/chatHub")
@@ -12,6 +16,33 @@ export class SignalRService {
     .build();
 
   public sendMessage(message: Message) {
-    this.connection.invoke("sendMessage", message);
+    this.connection.invoke("SendMessage", message);
+  }
+
+  public sendTypingStatus(isTyping: boolean) {
+    this.store.select(selectUsername).pipe(
+      first(),
+      tap((username: string) => {
+        const typingStatus: TypingStatus = {
+          username: username,
+          isTyping: isTyping
+        }
+        this.connection.invoke("UserIsTyping", typingStatus);
+      })
+    ).subscribe();
+  }
+
+  public async start() {
+    return this.connection.start();
+  }
+
+  public configure() {
+    this.connection.on('ReceiveMessage', (message: Message) => {
+      this.store.dispatch(receiveMessage(message));
+    });
+
+    this.connection.on('UserIsTyping', (typingStatus: TypingStatus) => {
+      console.log(typingStatus);
+    })
   }
 }

@@ -2,7 +2,12 @@
     <div class="messages">
       <message @fade [message]="message" *ngFor="let message of messages$ | async"></message>
     </div>
-    <div class="message-input">
+    <div class="messages-footer">
+      <div class="user-typing">
+        User is typing...
+      </div>
+      <div>
         <message-input></message-input>
+      </div>
     </div>
 </div>

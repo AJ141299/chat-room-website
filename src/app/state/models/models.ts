@@ -18,3 +18,8 @@ export interface Message {
   content: string;
   createdAt: string;
 }
+
+export interface TypingStatus {
+  username: string;
+  isTyping: boolean;
+}
