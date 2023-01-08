@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Message } from 'src/app/state/models/models';
+import { get12HourTime } from 'src/utilities/helpers';
 
 @Component({
   selector: 'message',
@@ -13,6 +14,6 @@ export class MessageComponent {
 
   ngOnInit() {
     this.dateTime = new Date(Number(this.message.createdAt));
-    this.displayTime = `${this.dateTime.getHours()}:${this.dateTime.getMinutes()}`
+    this.displayTime = get12HourTime(this.dateTime);
   }
 }
