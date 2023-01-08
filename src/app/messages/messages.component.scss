@@ -41,7 +41,7 @@
 .user-joined {
   text-align: center;
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -56,7 +56,7 @@
 
 @media only screen and (max-width: styles.$breakpoint-m) {
   .user-joined {
-    width: 800px;
+    width: 300px;
   }
 }
 

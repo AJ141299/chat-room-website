@@ -67,7 +67,7 @@ export class SignalRService {
       this.store.dispatch(addJoiningUser({username: username}));
       setTimeout(() => {
         this.store.dispatch(removeJoiningUser({username: username}));
-      }, 3000)
+      }, 2000)
     });
   }
 }
