@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { catchError, Observable, of, Subject, tap, timeout } from 'rxjs';
+import { catchError, debounceTime, EMPTY, Observable, of, repeat, startWith, Subject, tap, timeout, timeoutWith } from 'rxjs';
 import { SignalRService } from 'src/app/signalr.service';
 import { sendMessage } from 'src/app/state/actions/ui.actions';
 import { AppState, Message } from 'src/app/state/models/models';
@@ -23,8 +23,9 @@ export class MessageInputComponent {
     })
 
     this.typingStatus.pipe(
-      tap((value) => {console.log(value)}))
-      .subscribe();
+      tap((status) => this.signalRService.sendTypingStatus(status)),
+      debounceTime(1000)
+    ).subscribe(() => this.signalRService.sendTypingStatus(false));
   }
 
   sendMessage() {
@@ -42,7 +43,7 @@ export class MessageInputComponent {
   }
 
   isTyping() {
-    this.signalRService.sendTypingStatus(true);
+    this.typingStatus.next(true);
   }
 
   ngOnDestroy() {

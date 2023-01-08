@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/models/models';
-import { selectAllMessages } from '../state/selectors/ui.selectors';
+import { selectAllMessages, selectTypingUsers } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -19,6 +19,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class MessagesComponent {
   messages$ = this.store.select(selectAllMessages);
+  typingUsers$ = this.store.select(selectTypingUsers);
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) { }
 }

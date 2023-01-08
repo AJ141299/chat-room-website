@@ -11,6 +11,7 @@ export interface UiState {
   theme: string;
   messages: Message[];
   recentlySentMessage: Message;
+  typingUsers: TypingStatus[]
 }
 
 export interface Message {

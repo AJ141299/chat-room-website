@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { Store } from "@ngrx/store";
 import { first, tap } from "rxjs";
-import { receiveMessage } from "./state/actions/ui.actions";
+import { addTypingUser, receiveMessage, removeTypingUser } from "./state/actions/ui.actions";
 import { Message, AppState, TypingStatus } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
 
@@ -42,7 +42,13 @@ export class SignalRService {
     });
 
     this.connection.on('UserIsTyping', (typingStatus: TypingStatus) => {
-      console.log(typingStatus);
+      if (typingStatus.isTyping) {
+        console.log("Adding typing")
+        this.store.dispatch(addTypingUser(typingStatus));
+      } else {
+        console.log("Removing typing")
+        this.store.dispatch(removeTypingUser(typingStatus));
+      }
     })
   }
 }

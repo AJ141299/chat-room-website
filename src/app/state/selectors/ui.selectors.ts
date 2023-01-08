@@ -17,3 +17,8 @@ export const selectTheme = createSelector(
   selectUiState,
   (state: UiState) => state.theme
 );
+
+export const selectTypingUsers = createSelector(
+  selectUiState,
+  (state: UiState) => state.typingUsers
+);
