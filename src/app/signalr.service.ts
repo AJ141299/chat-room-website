@@ -14,7 +14,7 @@ export class SignalRService {
   constructor(private store: Store<AppState>) {}
 
   public connection: signalR.HubConnection = new signalR.HubConnectionBuilder()
-    .withUrl(devSignalRUrl)
+    .withUrl(prodSignalRUrl)
     .withAutomaticReconnect()
     .build();
 
