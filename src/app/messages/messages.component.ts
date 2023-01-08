@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../state/models/models';
-import { selectAllMessages, selectConnectedCount, selectJoiningUsers, selectTypingUsers } from '../state/selectors/ui.selectors';
+import { Announcement, AnnounceType, AppState } from '../state/models/models';
+import { selectAllMessages, selectAnnouncements, selectConnectedCount, selectTypingUsers } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { SignalRService } from '../signalr.service';
-import { first, tap } from 'rxjs';
-import { selectUsername } from '../state/selectors/user.selectors';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'messages',
@@ -43,25 +42,20 @@ import { selectUsername } from '../state/selectors/user.selectors';
 export class MessagesComponent {
   messages$ = this.store.select(selectAllMessages);
   typingUsers$ = this.store.select(selectTypingUsers);
-  currentUsername$ = this.store.select(selectUsername);
   usersCount$ = this.store.select(selectConnectedCount);
-  joiningUsers$ = this.store.select(selectJoiningUsers);
-  joiningUser: string | null;
+  announcements$ = this.store.select(selectAnnouncements);
+  announcement: Announcement | null;
+  announcementType = AnnounceType;
 
   constructor(private store: Store<AppState>, private signalRService: SignalRService) { }
 
   ngOnInit() {
-    this.signalRService.incrementConnectedCount();
-    this.currentUsername$.subscribe((username: string) => {
-      this.signalRService.announceJoin(username);
-    });
-
-    this.joiningUsers$.pipe(
-      tap((users) => {
-        if (!users.length) {
-          this.joiningUser = null;
+    this.announcements$.pipe(
+      tap((announcements) => {
+        if (!announcements.length) {
+          this.announcement = null;
         } else {
-          this.joiningUser = users[users.length - 1];
+          this.announcement = announcements[announcements.length - 1];
         }
       }))
     .subscribe();

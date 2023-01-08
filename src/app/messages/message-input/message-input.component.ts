@@ -34,11 +34,10 @@ export class MessageInputComponent {
       content: this.messageControl.getRawValue(),
       createdAt: new Date().getTime().toString() // UTC
     }
+
     if (message.content == null || message.content == '' ||  message.content == undefined) {
       return;
     }
-
-    console.log(message.createdAt);
 
     this.signalRService.sendTypingStatus(false);
     this.store.dispatch(sendMessage(message));

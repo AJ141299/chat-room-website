@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { Store } from "@ngrx/store";
 import { first, tap } from "rxjs";
-import { addJoiningUser, addTypingUser, receiveMessage, removeJoiningUser, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
-import { Message, AppState, TypingStatus } from "./state/models/models";
+import { addTypingUser, receiveMessage, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
+import { Message, AppState, TypingStatus, Announcement } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
 
 const devSignalRUrl: string = "https://localhost:3232/chatHub";
@@ -27,6 +27,11 @@ export class SignalRService {
     this.configureUserTyping();
     this.configureJoiningUsers();
     this.configureConnectedCount();
+    this.configureAdminMode();
+  }
+
+  public addUser(username: string) {
+    this.connection.invoke("AddConnectedUser", username);
   }
 
   public sendMessage(message: Message) {
@@ -46,12 +51,10 @@ export class SignalRService {
     ).subscribe();
   }
 
-  public announceJoin(username: string) {
-    this.connection.invoke("AnnounceUser", username);
-  }
-
-  public incrementConnectedCount() {
-    this.connection.invoke("IncrementConnectedCount");
+  private configureAdminMode() {
+    this.connection.on('EnableAdminMode', () => {
+      console.log("Admin is here")
+    });
   }
 
   private configureMessageReceival() {
@@ -71,11 +74,12 @@ export class SignalRService {
   }
 
   private configureJoiningUsers() {
-    this.connection.on('AnnounceUser', (username: string) => {
-      this.store.dispatch(addJoiningUser({username: username}));
-      setTimeout(() => {
-        this.store.dispatch(removeJoiningUser({username: username}));
-      }, 2000)
+    this.connection.on('AnnounceUser', (announce: Announcement) => {
+      console.log("Announce:", announce);
+      // this.store.dispatch(addJoiningUser({username: username}));
+      // setTimeout(() => {
+      //   this.store.dispatch(removeJoiningUser({username: username}));
+      // }, 2000)
     });
   }
 

@@ -23,9 +23,9 @@ export const selectTypingUsers = createSelector(
   (state: UiState) => state.typingUsers
 );
 
-export const selectJoiningUsers = createSelector(
+export const selectAnnouncements = createSelector(
   selectUiState,
-  (state: UiState) => state.joiningUsers
+  (state: UiState) => state.announcements
 );
 
 export const selectConnectedCount = createSelector(

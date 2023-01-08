@@ -12,7 +12,7 @@ export interface UiState {
   messages: Message[];
   recentlySentMessage: Message;
   typingUsers: TypingStatus[];
-  joiningUsers: string[];
+  announcements: Announcement[];
   connectedCount: number;
 }
 
@@ -25,4 +25,14 @@ export interface Message {
 export interface TypingStatus {
   username: string;
   isTyping: boolean;
+}
+
+export interface Announcement {
+  username: string;
+  type: AnnounceType;
+}
+
+export enum AnnounceType {
+  Joined,
+  Left
 }

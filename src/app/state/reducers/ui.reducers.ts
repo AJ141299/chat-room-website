@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { addJoiningUser, addTypingUser, receiveMessage, removeJoiningUser, removeTypingUser, sendMessage, setConnectedCount, setTheme } from "../actions/ui.actions";
+import { addAnnouncement, addTypingUser, receiveMessage, removeAnnouncement, removeTypingUser, sendMessage, setConnectedCount, setTheme } from "../actions/ui.actions";
 import { Message, TypingStatus, UiState } from "../models/models";
 
 export const initialState: UiState = {
@@ -7,7 +7,7 @@ export const initialState: UiState = {
   messages: [],
   recentlySentMessage: { username: '', content: '', createdAt: '' },
   typingUsers: [],
-  joiningUsers: [],
+  announcements: [],
   connectedCount: 0,
 };
 
@@ -36,13 +36,13 @@ export const uiReducer = createReducer(
     ...state,
     typingUsers: state.typingUsers.filter(status => status.username != typingStatus.username)
   })),
-  on(addJoiningUser, (state, {username}) => ({
+  on(addAnnouncement, (state, {announcement}) => ({
     ...state,
-    joiningUsers: [...state.joiningUsers, username]
+    announcements: [...state.announcements, announcement]
   })),
-  on(removeJoiningUser, (state, {username}) => ({
+  on(removeAnnouncement, (state, {announcement}) => ({
     ...state,
-    joiningUsers: state.joiningUsers.filter((user) => {user != username})
+    announcements: state.announcements.filter(a => a.username == announcement.username)
   })),
   on(setConnectedCount, (state, {count}) => ({
     ...state,

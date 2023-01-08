@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Message, TypingStatus } from '../models/models';
+import { Announcement, Message, TypingStatus } from '../models/models';
 
 export const sendMessage = createAction(
   '[Messages page] Send Message',
@@ -26,14 +26,14 @@ export const removeTypingUser = createAction(
   props<TypingStatus>()
 );
 
-export const addJoiningUser = createAction(
-  '[User details page] Add joining user',
-  props<{username: string}>()
+export const addAnnouncement = createAction(
+  '[User details page] Add announcement',
+  props<{announcement: Announcement}>()
 );
 
-export const removeJoiningUser = createAction(
-  '[User details page] Remove joining user',
-  props<{username: string}>()
+export const removeAnnouncement = createAction(
+  '[User details page] Remove announcement',
+  props<{announcement: Announcement}>()
 );
 
 export const setConnectedCount = createAction(

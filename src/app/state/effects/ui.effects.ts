@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { tap, withLatestFrom } from "rxjs";
-import { addJoiningUser, sendMessage, setTheme } from "../actions/ui.actions";
+import { sendMessage, setTheme } from "../actions/ui.actions";
 import { AppState } from "../models/models";
 import { SignalRService } from "src/app/signalr.service";
 import { selectRecentlySentMessage, selectTheme } from "../selectors/ui.selectors";
