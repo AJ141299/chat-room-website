@@ -32,7 +32,7 @@ export class MessageInputComponent {
     const message: Message = {
       username: this.currentUsername,
       content: this.messageControl.getRawValue(),
-      createdAt: new Date().getTime() // UTC
+      createdAt: new Date().getTime().toString() // UTC
     }
     if (message.content == null || message.content == '' ||  message.content == undefined) {
       return;

@@ -5,7 +5,7 @@ import { Message, TypingStatus, UiState } from "../models/models";
 export const initialState: UiState = {
   theme: 'light',
   messages: [],
-  recentlySentMessage: { username: '', content: '', createdAt: 0 },
+  recentlySentMessage: { username: '', content: '', createdAt: '' },
   typingUsers: [],
   joiningUsers: [],
   connectedCount: 0,

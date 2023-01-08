@@ -12,7 +12,7 @@ export class MessageComponent {
   displayTime: string;
 
   ngOnInit() {
-    this.dateTime = new Date(this.message.createdAt);
+    this.dateTime = new Date(Number(this.message.createdAt));
     this.displayTime = `${this.dateTime.getHours()}:${this.dateTime.getMinutes()}`
   }
 }
