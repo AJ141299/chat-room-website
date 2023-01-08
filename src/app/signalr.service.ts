@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { Store } from "@ngrx/store";
 import { first, tap } from "rxjs";
-import { addTypingUser, receiveMessage, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
+import { addAnnouncement, addTypingUser, receiveMessage, removeAnnouncement, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
 import { Message, AppState, TypingStatus, Announcement } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
 
@@ -74,12 +74,11 @@ export class SignalRService {
   }
 
   private configureJoiningUsers() {
-    this.connection.on('AnnounceUser', (announce: Announcement) => {
-      console.log("Announce:", announce);
-      // this.store.dispatch(addJoiningUser({username: username}));
-      // setTimeout(() => {
-      //   this.store.dispatch(removeJoiningUser({username: username}));
-      // }, 2000)
+    this.connection.on('AnnounceUser', (announcement: Announcement) => {
+      this.store.dispatch(addAnnouncement({announcement: announcement}));
+      setTimeout(() => {
+        this.store.dispatch(removeAnnouncement({announcement: announcement}));
+      }, 2000)
     });
   }
 

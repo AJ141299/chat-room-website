@@ -42,7 +42,7 @@ export const uiReducer = createReducer(
   })),
   on(removeAnnouncement, (state, {announcement}) => ({
     ...state,
-    announcements: state.announcements.filter(a => a.username == announcement.username)
+    announcements: state.announcements.filter(a => a.username != announcement.username)
   })),
   on(setConnectedCount, (state, {count}) => ({
     ...state,
