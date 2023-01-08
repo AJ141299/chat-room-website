@@ -1,6 +1,14 @@
+@use "/src/styles";
+
 input {
   color: var(--text-primary-color);
   padding: 10px 10px;
+}
+
+@media only screen and (max-width: styles.$breakpoint-s) {
+  input {
+    width: 70%;
+  }
 }
 
 button {
@@ -26,5 +34,7 @@ button:hover {
   border-style: solid;
   border-color: var(--text-secondary-color);
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
 }
 
