@@ -24,7 +24,7 @@
   flex-direction: column;
 }
 
-@media only screen and (max-height: styles.$breakpoint-s) {
+@media only screen and (max-height: styles.$breakpoint-m) {
   .container {
     height: 60vh;
   }
