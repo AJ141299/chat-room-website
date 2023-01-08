@@ -17,7 +17,6 @@ export class AppComponent {
     this.loadTheme();
     this.signalRService.start().then(() => {
       this.signalRService.configure();
-      this.signalRService.incrementConnectedCount();
     });
   }
 

@@ -51,6 +51,7 @@ export class MessagesComponent {
   constructor(private store: Store<AppState>, private signalRService: SignalRService) { }
 
   ngOnInit() {
+    this.signalRService.incrementConnectedCount();
     this.currentUsername$.subscribe((username: string) => {
       this.signalRService.announceJoin(username);
     });
