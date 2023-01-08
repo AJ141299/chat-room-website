@@ -1,13 +1,12 @@
 @use "/src/styles";
 
 .section-main {
-    margin: 35px 25%;
-    height: 100%;
+  margin: 15px 25%;
+  height: 100%;
 }
 
-
 @media only screen and (max-width: styles.$breakpoint-s) {
-    .section-main {
-        margin: 25px 10%;
-    }
+  .section-main {
+    margin: 25px 10%;
+  }
 }

@@ -25,3 +25,13 @@ export const removeTypingUser = createAction(
   '[Messages page] Remove typing user from list',
   props<TypingStatus>()
 );
+
+export const addJoiningUser = createAction(
+  '[User details page] Add joining user',
+  props<{username: string}>()
+);
+
+export const removeJoiningUser = createAction(
+  '[User details page] Remove joining user',
+  props<{username: string}>()
+);

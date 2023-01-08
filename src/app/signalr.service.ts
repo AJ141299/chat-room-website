@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { Store } from "@ngrx/store";
 import { first, tap } from "rxjs";
-import { addTypingUser, receiveMessage, removeTypingUser } from "./state/actions/ui.actions";
+import { addJoiningUser, addTypingUser, receiveMessage, removeJoiningUser, removeTypingUser } from "./state/actions/ui.actions";
 import { Message, AppState, TypingStatus } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
 
@@ -32,15 +32,27 @@ export class SignalRService {
     ).subscribe();
   }
 
+  public announceJoin(username: string) {
+    this.connection.invoke("AnnounceUser", username);
+  }
+
   public async start() {
     return this.connection.start();
   }
 
   public configure() {
+    this.configureMessageReceival()
+    this.configureUserTyping();
+    this.configureJoiningUsers();
+  }
+
+  private configureMessageReceival() {
     this.connection.on('ReceiveMessage', (message: Message) => {
       this.store.dispatch(receiveMessage(message));
     });
+  }
 
+  private configureUserTyping() {
     this.connection.on('UserIsTyping', (typingStatus: TypingStatus) => {
       if (typingStatus.isTyping) {
         this.store.dispatch(addTypingUser(typingStatus));
@@ -48,5 +60,14 @@ export class SignalRService {
         this.store.dispatch(removeTypingUser(typingStatus));
       }
     })
+  }
+
+  private configureJoiningUsers() {
+    this.connection.on('AnnounceUser', (username: string) => {
+      this.store.dispatch(addJoiningUser({username: username}));
+      setTimeout(() => {
+        this.store.dispatch(removeJoiningUser({username: username}));
+      }, 3000)
+    });
   }
 }

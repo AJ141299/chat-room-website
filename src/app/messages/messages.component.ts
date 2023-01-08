@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/models/models';
-import { selectAllMessages, selectTypingUsers } from '../state/selectors/ui.selectors';
+import { selectAllMessages, selectJoiningUsers, selectTypingUsers } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { SignalRService } from '../signalr.service';
+import { first, tap } from 'rxjs';
+import { selectUsername } from '../state/selectors/user.selectors';
 
 @Component({
   selector: 'messages',
@@ -36,6 +39,25 @@ import { trigger, style, animate, transition } from '@angular/animations';
 export class MessagesComponent {
   messages$ = this.store.select(selectAllMessages);
   typingUsers$ = this.store.select(selectTypingUsers);
+  currentUsername$ = this.store.select(selectUsername);
+  joiningUsers$ = this.store.select(selectJoiningUsers);
+  joiningUser: string | null;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private signalRService: SignalRService) { }
+
+  ngOnInit() {
+    this.currentUsername$.subscribe((username: string) => {
+      this.signalRService.announceJoin(username);
+    });
+
+    this.joiningUsers$.pipe(
+      tap((users) => {
+        if (!users.length) {
+          this.joiningUser = null;
+        } else {
+          this.joiningUser = users[users.length - 1];
+        }
+      }))
+    .subscribe();
+  }
 }

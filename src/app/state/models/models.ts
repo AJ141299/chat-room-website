@@ -12,6 +12,7 @@ export interface UiState {
   messages: Message[];
   recentlySentMessage: Message;
   typingUsers: TypingStatus[]
+  joiningUsers: string[]
 }
 
 export interface Message {

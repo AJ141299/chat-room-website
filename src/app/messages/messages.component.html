@@ -1,13 +1,22 @@
 <div @fade class="container">
-    <div class="messages">
-      <message @fadeDown [message]="message" *ngFor="let message of messages$ | async"></message>
+  <div *ngIf="joiningUser" class="user-joined">{{joiningUser}} joined</div>
+  <div class="messages">
+    <message
+      @fadeDown
+      [message]="message"
+      *ngFor="let message of messages$ | async"
+    ></message>
+  </div>
+  <div class="messages-footer">
+    <div
+      @easeIn
+      *ngIf="(typingUsers$ | async)?.length != 0; let user"
+      class="user-typing"
+    >
+      {{ (typingUsers$ | async)?.at(0)?.username }} is typing...
     </div>
-    <div class="messages-footer">
-      <div @easeIn *ngIf="(typingUsers$ | async)?.length != 0; let user" class="user-typing">
-        {{(typingUsers$ | async)?.at(0)?.username}} is typing...
-      </div>
-      <div>
-        <message-input></message-input>
-      </div>
+    <div>
+      <message-input></message-input>
     </div>
+  </div>
 </div>

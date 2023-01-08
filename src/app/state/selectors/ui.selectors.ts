@@ -22,3 +22,8 @@ export const selectTypingUsers = createSelector(
   selectUiState,
   (state: UiState) => state.typingUsers
 );
+
+export const selectJoiningUsers = createSelector(
+  selectUiState,
+  (state: UiState) => state.joiningUsers
+);
