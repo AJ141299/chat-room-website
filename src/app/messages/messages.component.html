@@ -1,4 +1,4 @@
-<div class="container">
+<div @fade class="container">
     <div class="messages">
       <message @fadeDown [message]="message" *ngFor="let message of messages$ | async"></message>
     </div>

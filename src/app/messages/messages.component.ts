@@ -9,6 +9,12 @@ import { trigger, style, animate, transition } from '@angular/animations';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
   animations: [
+    trigger('fade', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('150ms', style({ opacity: 1 }))
+      ])
+    ]),
     trigger('fadeDown', [
       transition(':enter', [
         style({ opacity: 0, transform: "translateY(-10%)" }),
