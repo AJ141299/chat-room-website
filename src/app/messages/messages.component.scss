@@ -26,13 +26,7 @@
 
 @media only screen and (max-height: styles.$breakpoint-s) {
   .container {
-    height: 70vh;
-  }
-}
-
-@media only screen and (max-height: styles.$breakpoint-xs) {
-  .container {
-    height: 50vh;
+    height: 60vh;
   }
 }
 
