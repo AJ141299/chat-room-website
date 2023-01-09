@@ -3,6 +3,7 @@
 input {
   color: var(--text-primary-color);
   padding: 10px 10px;
+  font-size: 18px;
 }
 
 @media only screen and (max-width: styles.$breakpoint-s) {
@@ -12,7 +13,8 @@ input {
 }
 
 button {
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 18px;
   cursor: pointer;
   color: var(--text-primary-color);
   padding: 10px 10px;
@@ -25,15 +27,18 @@ button:hover {
 }
 
 .container {
+  margin-top: 30vh;
   display: flex;
   justify-content: center;
 }
 
 .sub-container {
-  border: 2px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px;
   border-style: solid;
   border-color: var(--text-secondary-color);
-  border-radius: 5px;
   display: flex;
   justify-content: space-between;
 }

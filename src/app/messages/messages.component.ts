@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Announcement, AnnounceType, AppState } from '../state/models/models';
 import { selectAllMessages, selectAnnouncements, selectConnectedCount, selectTypingUsers } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { SignalRService } from '../signalr.service';
 import { debounceTime, tap } from 'rxjs';
 import { removeTypingUser } from '../state/actions/ui.actions';
 
@@ -48,7 +47,7 @@ export class MessagesComponent {
   announcement: Announcement | null;
   announcementType = AnnounceType;
 
-  constructor(private store: Store<AppState>, private signalRService: SignalRService) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
     this.announcements$.pipe(
