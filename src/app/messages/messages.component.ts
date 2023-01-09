@@ -4,7 +4,8 @@ import { Announcement, AnnounceType, AppState } from '../state/models/models';
 import { selectAllMessages, selectAnnouncements, selectConnectedCount, selectTypingUsers } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { SignalRService } from '../signalr.service';
-import { tap } from 'rxjs';
+import { debounceTime, tap } from 'rxjs';
+import { removeTypingUser } from '../state/actions/ui.actions';
 
 @Component({
   selector: 'messages',
@@ -59,5 +60,13 @@ export class MessagesComponent {
         }
       }))
     .subscribe();
+
+    this.typingUsers$.pipe(
+      debounceTime(1000)
+    ).subscribe((status) => {
+      if (status.length) {
+        this.store.dispatch(removeTypingUser(status.at(status.length - 1)!));
+      }
+    })
   }
 }

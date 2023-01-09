@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
-import { catchError, debounceTime, EMPTY, Observable, of, repeat, startWith, Subject, tap, timeout, timeoutWith } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { SignalRService } from 'src/app/signalr.service';
 import { sendMessage } from 'src/app/state/actions/ui.actions';
 import { AppState, Message } from 'src/app/state/models/models';
@@ -13,7 +12,6 @@ import { selectUsername } from 'src/app/state/selectors/user.selectors';
   styleUrls: ['./message-input.component.scss']
 })
 export class MessageInputComponent {
-  typingStatus = new Subject<boolean>();
   messageControl: FormControl = new FormControl();
   currentUsername: string;
 
@@ -21,11 +19,6 @@ export class MessageInputComponent {
     this.store.select(selectUsername).pipe().subscribe((username: string) => {
       this.currentUsername = username;
     })
-
-    this.typingStatus.pipe(
-      tap((status) => this.signalRService.sendTypingStatus(status)),
-      debounceTime(1000)
-    ).subscribe(() => this.signalRService.sendTypingStatus(false));
   }
 
   sendMessage() {
@@ -45,10 +38,6 @@ export class MessageInputComponent {
   }
 
   isTyping() {
-    this.typingStatus.next(true);
-  }
-
-  ngOnDestroy() {
-    this.typingStatus.unsubscribe();
+    this.signalRService.sendTypingStatus(true);
   }
 }
