@@ -19,7 +19,21 @@ export class SignalRService {
     .build();
 
   public async start() {
-    return this.connection.start();
+    return this.connection.start().then(() => this.configure());
+  }
+
+  public close() {
+    return this.connection.stop();
+  }
+
+  public reset() {
+    this.close().then(() => {
+      this.start();
+    })
+  }
+
+  public getConnectionStatus() {
+    return this.connection.state;
   }
 
   public configure() {
@@ -32,6 +46,10 @@ export class SignalRService {
 
   public addUser(username: string) {
     this.connection.invoke("AddConnectedUser", username);
+  }
+
+  public logout() {
+    this.connection.invoke("RemoveConnectedUser");
   }
 
   public sendMessage(message: Message) {

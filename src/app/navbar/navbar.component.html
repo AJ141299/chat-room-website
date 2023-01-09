@@ -4,6 +4,10 @@
             <p class="logo-header">Chattly</p>
         </div>
         <div class="nav-item">
+          <button (click)="logout()" class="logout">
+            Logout
+          </button>
+          <div>
             <button (click)="changeTheme()">
                 <div *ngIf="(currentTheme$ | async) == 'dark'" class="theme-btn">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white">
@@ -16,6 +20,7 @@
                   </svg>
                 </div>
             </button>
+          </div>
         </div>
     </div>
 </div>

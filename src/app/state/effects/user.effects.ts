@@ -26,8 +26,10 @@ export class UserEffects {
             ),
             withLatestFrom(this.username$),
             tap(([_, username]) => {
+              if (username != "") {
                 this.signalRService.addUser(username);
                 this.router.navigate(['/messages']);
+              }
             })
         ),
         {dispatch: false}

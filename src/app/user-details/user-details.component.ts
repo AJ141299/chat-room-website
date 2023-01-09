@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { HubConnectionState } from '@microsoft/signalr';
 import { Store } from '@ngrx/store';
+import { SignalRService } from '../signalr.service';
 import { setUsername } from '../state/actions/user.actions';
 import { AppState } from '../state/models/models';
 
@@ -12,7 +14,7 @@ import { AppState } from '../state/models/models';
 export class UserDetailsComponent {
   username: FormControl = new FormControl();
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private signalRService: SignalRService) {}
 
   setUsername() {
     const username = this.username.getRawValue();

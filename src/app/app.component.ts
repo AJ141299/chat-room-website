@@ -15,9 +15,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.loadTheme();
-    this.signalRService.start().then(() => {
-      this.signalRService.configure();
-    });
+    this.signalRService.start();
   }
 
   loadTheme() {
