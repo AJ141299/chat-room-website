@@ -7,3 +7,8 @@ export const selectUsername = createSelector(
     selectUserState,
     (state: UserState) => state.username
 );
+
+export const selectLoginStatus = createSelector(
+  selectUserState,
+  (state: UserState) => state.isLoggedIn
+);

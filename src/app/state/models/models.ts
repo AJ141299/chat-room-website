@@ -5,6 +5,7 @@ export interface AppState {
 
 export interface UserState {
   username: string;
+  isLoggedIn: boolean;
 }
 
 export interface UiState {

@@ -4,7 +4,7 @@
             <p class="logo-header">Chattly</p>
         </div>
         <div class="nav-item">
-          <button (click)="logout()" class="logout">
+          <button *ngIf="isLoggedIn$ | async" (click)="logout()" class="logout">
             Logout
           </button>
           <div>
