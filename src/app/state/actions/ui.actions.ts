@@ -32,8 +32,7 @@ export const addAnnouncement = createAction(
 );
 
 export const removeAnnouncement = createAction(
-  '[User details page] Remove announcement',
-  props<{announcement: Announcement}>()
+  '[User details page] Remove announcement'
 );
 
 export const setConnectedCount = createAction(

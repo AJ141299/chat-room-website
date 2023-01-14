@@ -8,7 +8,7 @@ import {
   selectTypingUsers,
 } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { BehaviorSubject, debounceTime, interval, Observable, startWith, Subject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, delay, EMPTY, interval, Observable, startWith, Subject, switchMap, takeUntil, tap, timeout } from 'rxjs';
 import { removeTypingUser } from '../state/actions/ui.actions';
 
 @Component({
@@ -51,25 +51,12 @@ import { removeTypingUser } from '../state/actions/ui.actions';
   ],
 })
 export class MessagesComponent {
+  announcementType = AnnounceType;
+
   typingUsers$ = this.store.select(selectTypingUsers);
   usersCount$ = this.store.select(selectConnectedCount);
-  showAnnouncement: boolean = true;
-  announcements$: Observable<Announcement | null> = this.store
-    .select(selectAnnouncements)
-    .pipe(
-      switchMap(
-        (
-          announcement: Announcement | null
-        ): Observable<Announcement | null> => {
-          this.showAnnouncement = true;
-          setTimeout(() => {this.showAnnouncement = false}, 2000)
-          return new Observable<Announcement | null>().pipe(
-            startWith(announcement)
-          );
-        }
-      ),
-      // tap(() => {setTimeout(() => {this.showAnnouncement$.next(false)}, 2000)})
-    );
+  clearAnnouncement = new Subject<boolean>();
+  announcements$: Observable<Announcement[]> = this.store.select(selectAnnouncements);
   messages$ = this.store.select(selectAllMessages).pipe(
     tap(() => {
       this.scrollToBottom();
@@ -77,7 +64,6 @@ export class MessagesComponent {
   );
 
   @ViewChild('messagesContainer') private messagesContainer: ElementRef;
-  announcementType = AnnounceType;
 
   constructor(private store: Store<AppState>) {}
 

@@ -1,4 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
+import { addAnnouncementHelper } from "src/utilities/helpers";
 import { addAnnouncement, addTypingUser, receiveMessage, removeAnnouncement, removeTypingUser, sendMessage, setConnectedCount, setTheme } from "../actions/ui.actions";
 import { AnnounceType, Message, TypingStatus, UiState } from "../models/models";
 
@@ -7,7 +8,7 @@ export const initialState: UiState = {
   messages: [],
   recentlySentMessage: { username: '', content: '', createdAt: '' },
   typingUsers: [],
-  announcements: null,
+  announcements: [],
   connectedCount: 0,
 };
 
@@ -38,11 +39,11 @@ export const uiReducer = createReducer(
   })),
   on(addAnnouncement, (state, {announcement}) => ({
     ...state,
-    announcements: announcement
+    announcements: addAnnouncementHelper(state.announcements, announcement)
   })),
-  on(removeAnnouncement, (state, {announcement}) => ({
+  on(removeAnnouncement, (state) => ({
     ...state,
-    announcements: announcement
+    announcements: state.announcements.slice(1, state.announcements.length)
   })),
   on(setConnectedCount, (state, {count}) => ({
     ...state,

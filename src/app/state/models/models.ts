@@ -13,7 +13,7 @@ export interface UiState {
   messages: Message[];
   recentlySentMessage: Message;
   typingUsers: TypingStatus[];
-  announcements: Announcement | null;
+  announcements: Announcement[];
   connectedCount: number;
 }
 

@@ -94,9 +94,6 @@ export class SignalRService {
   private configureJoiningUsers() {
     this.connection.on('AnnounceUser', (announcement: Announcement) => {
       this.store.dispatch(addAnnouncement({announcement: announcement}));
-      setTimeout(() => {
-        this.store.dispatch(removeAnnouncement({announcement: announcement}));
-      }, 2000)
     });
   }
 
