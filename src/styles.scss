@@ -1,5 +1,3 @@
-// @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 $breakpoint-xs: 300px;
 $breakpoint-s: 600px;
 $breakpoint-m: 1279.9px;
@@ -8,46 +6,50 @@ $breakpoint-xl: 2599.9px;
 $breakpoint-xxl: 2600px;
 
 :root {
-    --bg-color: hsla(230,15%,10%,1.0);
-    --element-color: hsla(232,14%,14%,1.0);
-    --shadow-color: hsla(230,15%,8%,1.0);
-    --text-primary-color: hsla(0,0%,90%,1.0);
-    --text-secondary-color: hsla(0,0%,70%,1.0);
-    --text-tertiary-color: hsla(0,0%,50%,1.0);
-    --text-quaternary-color: hsla(0,0%,40%,1.0);
-    --logo-gradient-left: hsla(200,52%,46%,1.0);
-    --logo-gradient-right: rgb(98, 219, 183);
+  --bg-color: hsla(215, 78%, 7%, 1);
+  --element-color: hsla(216, 76%, 14%, 1);
+  --shadow-color: hsla(216, 76%, 8%, 1);
+  --text-primary-color: hsla(0, 0%, 90%, 1);
+  --text-secondary-color: hsla(0, 0%, 70%, 1);
+  --text-tertiary-color: hsla(0, 0%, 50%, 1);
+  --text-quaternary-color: hsla(0, 0%, 40%, 1);
+  --logo-gradient-left: hsla(200, 52%, 46%, 1);
+  --logo-gradient-right: rgb(98, 219, 183);
+
+  --bg-nav-icon: hsla(214, 76%, 12%, 1);
+  --border-nav-icon: hsla(214, 65%, 27%, 1);
 }
 
 [data-theme="light"] {
-    --bg-color: white;
-    --element-color: hsla(0,0%,90%,1.0);
-    --shadow-color: hsla(0,0%,80%,1.0);
+  --bg-color: hsla(211, 100%, 96%, 1);
+  --element-color: hsla(211, 100%, 90%, 1);
+  --shadow-color: hsla(211, 100%, 80%, 1);
+  --bg-nav-icon: white;
 
-    --text-primary-color: hsla(0,0%,10%,1.0);
-    --text-secondary-color: hsla(0,0%,25%,1.0);
-    --text-tertiary-color: hsla(0,0%,35%,1.0);
-    --text-quaternary-color: hsla(0,0%,50%,1.0);
+  --text-primary-color: hsla(0, 0%, 10%, 1);
+  --text-secondary-color: hsla(0, 0%, 25%, 1);
+  --text-tertiary-color: hsla(0, 0%, 35%, 1);
+  --text-quaternary-color: hsla(0, 0%, 50%, 1);
 }
 
 * {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .bg-color-transition {
-    transition: background-color 350ms ease;
+  transition: background-color 350ms ease;
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
-textarea:focus, input:focus{
-    outline: none;
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
 // hide arrows on input number type
@@ -59,18 +61,32 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-button, input {
-    background-color: transparent;
-    border: 0;
+button,
+input {
+  background-color: transparent;
+  border: 0;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    color: var(--text-primary-color);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  color: var(--text-primary-color);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.white-icon {
+  color: white;
 }

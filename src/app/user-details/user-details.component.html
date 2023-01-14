@@ -1,6 +1,7 @@
 <div class="container">
   <div class="sub-container">
-    <input (keyup.enter)="setUsername()" placeholder="Enter a username..." [formControl]="username" type="text">
-    <button (click)="setUsername()" class="submit">Submit</button>
+    <!-- <input (keyup.enter)="setUsername()" placeholder="Enter a username..." [formControl]="username" type="text"> -->
+    <input matInput (keyup.enter)="setUsername()" placeholder="Enter a username..." type="text" [formControl]="username">
   </div>
+  <button (click)="setUsername()" class="submit">Submit</button>
 </div>

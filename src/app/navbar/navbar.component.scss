@@ -1,78 +1,66 @@
 .nav {
-    width: full;
-    padding: 22px 0;
+  width: full;
+  padding: 25px 50px;
+}
+
+.nav-icon {
+  font-weight: 300;
+}
+
+.nav-icon-wrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: var(--bg-nav-icon);
+  padding: 7px;
+  border: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: var(--border-nav-icon);
+  transition: background-color 200ms ease-out;
+}
+
+.nav-icon-wrapper:hover {
+  background-color: var(--element-color);
 }
 
 .nav-list {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
 }
 
 .nav-item {
-    margin: auto 0;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  margin: auto 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .logout {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--text-primary-color);
+  border-radius: 10px;
   cursor: pointer;
-  padding: 8px 10px;
-  border: 1px;
-  border-color: var(--text-primary-color);
-  border-style: solid;
-  position: relative;
-  transition: color ease 200ms;
+  padding: 6px 18px;
+  transition: background-color ease-out 200ms;
   overflow: hidden;
 }
 
 .logout:hover {
-  color: var(--bg-color);
-}
-
-.logout::after {
-  content: '';
-  background-color: var(--text-secondary-color);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transform: scale(0, 1);
-  transform-origin: left;
-  transition: transform ease 200ms;
-  overflow: hidden;
-}
-
-.logout:hover::after {
-  content: '';
-  transform: scale(1, 1);
+  background-color: var(--element-color);
 }
 
 .logo-header {
-    display: inline-block;
-    font-size: 28px;
-    font-weight: 800;
-    background-image: linear-gradient(to right, var(--logo-gradient-left), var(--logo-gradient-right));
-    background-clip: text;
-    color: transparent;
-}
-
-.theme-btn {
-    height: 32px;
-    width: 32px;
-    cursor: pointer;
-    transition: transform 150ms ease-out;
-}
-
-.theme-btn:hover {
-  transform: scale(1.2);
-}
-
-.theme-btn:active {
-  transform: scale(0.8);
+  cursor: default;
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 800;
+  background-image: linear-gradient(
+    to right,
+    var(--logo-gradient-left),
+    var(--logo-gradient-right)
+  );
+  background-clip: text;
+  color: transparent;
 }
