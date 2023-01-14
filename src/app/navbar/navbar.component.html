@@ -11,13 +11,13 @@
         <button (click)="changeTheme()" class="nav-icon-wrapper">
           <span
             *ngIf="(currentTheme$ | async) == 'dark'"
-            class="nav-icon white-icon material-symbols-outlined"
+            class="icon material-symbols-outlined"
           >
           light_mode
           </span>
           <span
             *ngIf="(currentTheme$ | async) == 'light'"
-            class="nav-icon material-symbols-outlined"
+            class="icon material-symbols-outlined"
           >
             dark_mode
           </span>
