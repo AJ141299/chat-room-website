@@ -1,15 +1,38 @@
 <div @fade class="container">
-  <div @fadeDown *ngIf="announcement" class="announcement">
-    <span *ngIf="announcement.type == announcementType.Joined" class="icon announcement-icon material-symbols-outlined">
+  <div
+    @fadeDown
+    *ngIf="showAnnouncement"
+    class="announcement"
+  >
+  <div *ngIf="(announcements$ | async) as announcement">
+    <span
+      *ngIf="
+        announcement.type ==
+        announcementType.Joined
+      "
+      class="icon announcement-icon material-symbols-outlined"
+    >
       person_add
     </span>
-    <span *ngIf="announcement.type == announcementType.Left" class="icon announcement-icon material-symbols-outlined">
+    <span
+      *ngIf="
+        announcement.type ==
+        announcementType.Left
+      "
+      class="icon announcement-icon material-symbols-outlined"
+    >
       person_remove
     </span>
-    {{announcement.username}} {{announcementType[announcement.type].toLowerCase()}}
+    <p>
+      {{ announcement.username }}
+      {{ announcementType[announcement.type].toLowerCase() }}
+    </p>
   </div>
-  <div class="users-count">Users: <span @fadeDown>{{usersCount$ | async}}</span></div>
-  <div class="messages">
+  </div>
+  <div class="users-count">
+    Users: <span @fadeDown>{{ usersCount$ | async }}</span>
+  </div>
+  <div #messagesContainer class="messages">
     <message
       @fadeDown
       [message]="message"

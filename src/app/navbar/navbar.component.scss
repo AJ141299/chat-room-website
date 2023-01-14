@@ -1,6 +1,22 @@
+@use "/src/styles";
+
 .nav {
   width: full;
   padding: 25px 50px;
+}
+
+@media only screen and (max-width: styles.$breakpoint-s) {
+  .nav {
+    width: full;
+    padding: 25px 25px;
+  }
+}
+
+@media only screen and (max-width: styles.$breakpoint-xs) {
+  .nav {
+    width: full;
+    padding: 25px 15px;
+  }
 }
 
 .nav-icon-wrapper {

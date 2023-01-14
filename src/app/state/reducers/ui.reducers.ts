@@ -1,13 +1,13 @@
 import { createReducer, on } from "@ngrx/store";
 import { addAnnouncement, addTypingUser, receiveMessage, removeAnnouncement, removeTypingUser, sendMessage, setConnectedCount, setTheme } from "../actions/ui.actions";
-import { Message, TypingStatus, UiState } from "../models/models";
+import { AnnounceType, Message, TypingStatus, UiState } from "../models/models";
 
 export const initialState: UiState = {
   theme: 'light',
   messages: [],
   recentlySentMessage: { username: '', content: '', createdAt: '' },
   typingUsers: [],
-  announcements: [],
+  announcements: null,
   connectedCount: 0,
 };
 
@@ -38,11 +38,11 @@ export const uiReducer = createReducer(
   })),
   on(addAnnouncement, (state, {announcement}) => ({
     ...state,
-    announcements: [...state.announcements, announcement]
+    announcements: announcement
   })),
   on(removeAnnouncement, (state, {announcement}) => ({
     ...state,
-    announcements: state.announcements.filter(a => a.username != announcement.username)
+    announcements: announcement
   })),
   on(setConnectedCount, (state, {count}) => ({
     ...state,
