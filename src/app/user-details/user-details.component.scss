@@ -20,6 +20,9 @@ button {
   border: 1px;
   border-color: var(--text-secondary-color);
   border-style: solid;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
   position: relative;
 }
 
@@ -36,9 +39,12 @@ button::after {
   top: 0;
   left: 0;
   z-index: -1;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
   transform: scale(0, 1);
   transform-origin: left;
-  transition: transform ease 200ms;
+  transition: transform ease 150ms;
   overflow: hidden;
 }
 
