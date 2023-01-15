@@ -1,5 +1,8 @@
 <div @fade class="container">
-  <div *ngIf="announcements$ | async; let announcements" class="announcements-container">
+  <div
+    *ngIf="announcements$ | async; let announcements"
+    class="announcements-container"
+  >
     <div *ngFor="let announcement of announcements" class="announcement">
       <span
         *ngIf="announcement.type == announcementType.Joined"
@@ -25,8 +28,8 @@
   <div (scroll)="onScroll($event)" #messagesContainer class="messages">
     <message
       @fadeDown
-      [message]="message"
       *ngFor="let message of messages$ | async"
+      [message]="message"
     ></message>
   </div>
   <div class="messages-footer">
@@ -37,8 +40,6 @@
     >
       {{ (typingUsers$ | async)?.at(0)?.username }} is typing...
     </div>
-    <div>
-      <message-input></message-input>
-    </div>
+    <message-input></message-input>
   </div>
 </div>

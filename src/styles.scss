@@ -6,6 +6,7 @@ $breakpoint-xl: 2599.9px;
 $breakpoint-xxl: 2600px;
 
 :root {
+  --lighter-bg-color: hsla(240, 21%, 20%, 1);
   --bg-color: hsla(240, 21%, 15%, 1);
   --element-color: hsla(240, 21%, 13%, 1);
   --shadow-color: hsla(240, 21%, 8%, 1);
@@ -22,6 +23,7 @@ $breakpoint-xxl: 2600px;
 }
 
 [data-theme="light"] {
+  --lighter-bg-color: hsla(211, 100%, 98%, 1);
   --bg-color: hsla(211, 100%, 96%, 1);
   --element-color: hsla(211, 100%, 90%, 1);
   --shadow-color: hsla(211, 100%, 80%, 1);
