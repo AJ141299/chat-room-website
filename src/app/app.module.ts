@@ -15,6 +15,7 @@ import { reducers, effects } from './state/app.state';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     MessagesComponent,
     UserDetailsComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

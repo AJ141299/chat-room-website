@@ -55,6 +55,7 @@ import { baseUrl } from '../app.component';
 export class MessagesComponent {
   announcementType = AnnounceType;
   stickScrollToBottom: boolean = true;
+  loadingComplete: boolean = false;
 
   typingUsers$ = this.store.select(selectTypingUsers);
   usersCount$ = this.store.select(selectConnectedCount);
@@ -82,6 +83,7 @@ export class MessagesComponent {
       .get(baseUrl + '/messages/get-messages')
       .subscribe((messages: any) => {
         this.store.dispatch(loadMessages({ messages: messages }));
+        this.loadingComplete = true;
       });
   }
 
