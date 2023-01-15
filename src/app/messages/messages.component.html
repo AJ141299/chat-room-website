@@ -33,13 +33,13 @@
     ></message>
   </div>
   <div class="messages-footer">
-    <div
-      @easeIn
-      *ngIf="(typingUsers$ | async)?.length != 0; let user"
-      class="user-typing"
-    >
-      {{ (typingUsers$ | async)?.at(0)?.username }} is typing...
-    </div>
     <message-input></message-input>
+  </div>
+  <div
+    @easeIn
+    *ngIf="(typingUsers$ | async)?.length != 0; let user"
+    class="user-typing"
+  >
+    {{ (typingUsers$ | async)?.at(0)?.username }} is typing...
   </div>
 </div>
