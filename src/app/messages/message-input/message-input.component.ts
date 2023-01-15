@@ -41,8 +41,7 @@ export class MessageInputComponent {
         debounceTime(1000),
         takeUntil(this.unsubscribe$)
       )
-      .subscribe((status) => {
-        console.log('Status after debounce', status);
+      .subscribe(() => {
         this.signalRService.sendTypingStatus(false);
       });
   }

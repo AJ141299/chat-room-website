@@ -22,7 +22,7 @@
   <div class="users-count">
     Users: <span @fadeDown>{{ usersCount$ | async }}</span>
   </div>
-  <div #messagesContainer class="messages">
+  <div (scroll)="onScroll($event)" #messagesContainer class="messages">
     <message
       @fadeDown
       [message]="message"

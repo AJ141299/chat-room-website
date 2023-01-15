@@ -52,6 +52,7 @@ import { removeTypingUser } from '../state/actions/ui.actions';
 })
 export class MessagesComponent {
   announcementType = AnnounceType;
+  stickScrollToBottom: boolean = true;
 
   typingUsers$ = this.store.select(selectTypingUsers);
   usersCount$ = this.store.select(selectConnectedCount);
@@ -59,17 +60,14 @@ export class MessagesComponent {
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
   announcements$: Observable<Announcement[]> =
     this.store.select(selectAnnouncements);
-  messages$ = this.store.select(selectAllMessages).pipe(
-    tap(() => {
-      this.scrollToBottom();
-    })
-  );
+  messages$ = this.store.select(selectAllMessages);
 
   @ViewChild('messagesContainer') private messagesContainer: ElementRef;
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
+    // clears typing status in the event of target client losing connection and never returning false typing status
     this.typingUsers$
       .pipe(debounceTime(1100), takeUntil(this.unsubscribe$))
       .subscribe((status) => {
@@ -77,6 +75,20 @@ export class MessagesComponent {
           this.store.dispatch(removeTypingUser(status.at(status.length - 1)!));
         }
       });
+  }
+
+  ngAfterViewChecked() {
+    if (this.stickScrollToBottom) {
+      this.scrollToBottom();
+    }
+  }
+
+  onScroll(event: any) {
+    if (Math.ceil(event.target.offsetHeight + event.target.scrollTop) >= event.target.scrollHeight) {
+      this.stickScrollToBottom = true;
+    } else {
+      this.stickScrollToBottom = false;
+    }
   }
 
   scrollToBottom(): void {
