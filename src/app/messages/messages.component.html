@@ -43,4 +43,4 @@
     {{ (typingUsers$ | async)?.at(0)?.username }} is typing...
   </div>
 </div>
-<loader *ngIf="!loadingComplete"></loader>
+<loader info="Loading messages" *ngIf="!loadingComplete"></loader>

@@ -3,4 +3,4 @@
 <main *ngIf="loadingComplete" class="section-main">
   <router-outlet></router-outlet>
 </main>
-<loader *ngIf="!loadingComplete"></loader>
+<loader info="Connecting" *ngIf="!loadingComplete"></loader>
