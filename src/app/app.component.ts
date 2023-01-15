@@ -14,12 +14,13 @@ export const baseUrl: string = "https://chat-room-server20230107234625.azurewebs
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  loadingComplete: boolean = false;
+
   constructor(private signalRService: SignalRService, private store: Store<AppState>) {}
 
   ngOnInit() {
     this.loadTheme();
-    this.signalRService.start();
-
+    this.signalRService.start().then(() => {this.loadingComplete = true});
   }
 
   loadTheme() {
