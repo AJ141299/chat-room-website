@@ -59,6 +59,18 @@
   width: 500px;
 }
 
+@media only screen and (max-width: styles.$breakpoint-m) {
+  .announcements-container {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: styles.$breakpoint-s) {
+  .announcements-container {
+    width: 150px;
+  }
+}
+
 .announcement {
   text-align: center;
   color: var(--text-tertiary-color);
@@ -69,18 +81,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-@media only screen and (max-width: styles.$breakpoint-m) {
-  .announcement {
-    width: 300px;
-  }
-}
-
-@media only screen and (max-width: styles.$breakpoint-s) {
-  .announcement {
-    width: 300px;
-  }
 }
 
 .users-count {
