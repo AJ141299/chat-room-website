@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap, withLatestFrom } from 'rxjs';
-import { addAnnouncement, removeAnnouncement, sendMessage, setTheme } from '../actions/ui.actions';
+import { addAnnouncement, changeTheme, removeAnnouncement, sendMessage, setTheme } from '../actions/ui.actions';
 import { AppState } from '../models/models';
 import { SignalRService } from 'src/app/signalr.service';
 import {
@@ -36,7 +36,7 @@ export class UiEffects {
   setTheme$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(setTheme),
+        ofType(setTheme, changeTheme),
         withLatestFrom(this.theme$),
         tap(([_, theme]) => {
           document.documentElement.setAttribute('data-theme', theme);

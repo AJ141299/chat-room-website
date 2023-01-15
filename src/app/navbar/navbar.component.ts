@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { first, Observable, of, tap } from 'rxjs';
-import { SignalRService } from '../signalr.service';
-import { setTheme } from '../state/actions/ui.actions';
-import { logout, setUsername } from '../state/actions/user.actions';
+import { Observable, of, Subject, takeUntil, tap } from 'rxjs';
+import { changeTheme } from '../state/actions/ui.actions';
+import { logout} from '../state/actions/user.actions';
 import { AppState } from '../state/models/models';
 import { selectTheme } from '../state/selectors/ui.selectors';
 import { selectLoginStatus } from '../state/selectors/user.selectors';
@@ -22,13 +20,7 @@ export class NavbarComponent {
     private store: Store<AppState>) {}
 
   changeTheme() {
-    this.currentTheme$.pipe(
-      first(),
-      tap((theme: string) => {
-        const newTheme = theme == "dark" ? "light" : "dark";
-        this.store.dispatch(setTheme({theme: newTheme}))
-      })
-    ).subscribe();
+    this.store.dispatch(changeTheme());
   }
 
   logout() {

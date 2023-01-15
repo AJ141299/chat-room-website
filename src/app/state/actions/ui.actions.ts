@@ -16,6 +16,10 @@ export const setTheme = createAction(
   props<{theme: string}>()
 );
 
+export const changeTheme = createAction(
+  '[All pages] Change Theme'
+);
+
 export const addTypingUser = createAction(
   '[Messages page] Add Typing User to list',
   props<TypingStatus>()

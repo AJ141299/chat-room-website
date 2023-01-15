@@ -1,10 +1,23 @@
-import { createReducer, on } from "@ngrx/store";
-import { addAnnouncementHelper } from "src/utilities/helpers";
-import { addAnnouncement, addTypingUser, receiveMessage, removeAnnouncement, removeTypingUser, sendMessage, setConnectedCount, setTheme } from "../actions/ui.actions";
-import { AnnounceType, Message, TypingStatus, UiState } from "../models/models";
+import { createReducer, on } from '@ngrx/store';
+import {
+  addAnnouncementHelper,
+  getNewThemeHelper,
+} from 'src/utilities/helpers';
+import {
+  addAnnouncement,
+  addTypingUser,
+  receiveMessage,
+  removeAnnouncement,
+  removeTypingUser,
+  sendMessage,
+  setConnectedCount,
+  changeTheme,
+  setTheme,
+} from '../actions/ui.actions';
+import { Message, TypingStatus, UiState } from '../models/models';
 
 export const initialState: UiState = {
-  theme: 'light',
+  theme: 'dark',
   messages: [],
   recentlySentMessage: { username: '', content: '', createdAt: '' },
   typingUsers: [],
@@ -17,36 +30,45 @@ export const uiReducer = createReducer(
   on(sendMessage, (state, message: Message) => ({
     ...state,
     messages: [...state.messages, message],
-    recentlySentMessage: message
+    recentlySentMessage: message,
   })),
   on(receiveMessage, (state, message: Message) => ({
     ...state,
-    messages: [...state.messages, message]
+    messages: [...state.messages, message],
   })),
-  on(setTheme, (state, {theme}) => ({
+  on(setTheme, (state, { theme }) => ({
     ...state,
-    theme: theme
+    theme: theme,
+  })),
+  on(changeTheme, (state) => ({
+    ...state,
+    theme: getNewThemeHelper(state.theme),
   })),
   on(addTypingUser, (state, typingStatus: TypingStatus) => ({
     ...state,
-    typingUsers: [...state.typingUsers.filter(
-      status => status.username != typingStatus.username),
-      typingStatus]
+    typingUsers: [
+      ...state.typingUsers.filter(
+        (status) => status.username != typingStatus.username
+      ),
+      typingStatus,
+    ],
   })),
   on(removeTypingUser, (state, typingStatus: TypingStatus) => ({
     ...state,
-    typingUsers: state.typingUsers.filter(status => status.username != typingStatus.username)
+    typingUsers: state.typingUsers.filter(
+      (status) => status.username != typingStatus.username
+    ),
   })),
-  on(addAnnouncement, (state, {announcement}) => ({
+  on(addAnnouncement, (state, { announcement }) => ({
     ...state,
-    announcements: addAnnouncementHelper(state.announcements, announcement)
+    announcements: addAnnouncementHelper(state.announcements, announcement),
   })),
   on(removeAnnouncement, (state) => ({
     ...state,
-    announcements: state.announcements.slice(1, state.announcements.length)
+    announcements: state.announcements.slice(1, state.announcements.length),
   })),
-  on(setConnectedCount, (state, {count}) => ({
+  on(setConnectedCount, (state, { count }) => ({
     ...state,
-    connectedCount: count
-  })),
+    connectedCount: count,
+  }))
 );

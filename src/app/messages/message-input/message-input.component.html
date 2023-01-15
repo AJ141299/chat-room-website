@@ -1,5 +1,5 @@
 <p class="container">
-    <input (keyup)="isTyping()" [formControl]="messageControl" (keyup.enter)="sendMessage()" placeholder="Write a message..." type="text">
+    <input (keyup)="typingStatus$.next(true)" [formControl]="messageControl" (keyup.enter)="sendMessage()" placeholder="Write a message..." type="text">
     <button (click)="sendMessage()" class="send-btn">
         <span class="material-symbols-outlined icon send-icon">
             send

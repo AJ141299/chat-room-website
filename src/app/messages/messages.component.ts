@@ -8,7 +8,7 @@ import {
   selectTypingUsers,
 } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { BehaviorSubject, debounceTime, delay, EMPTY, interval, Observable, startWith, Subject, switchMap, takeUntil, tap, timeout } from 'rxjs';
+import { debounceTime, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { removeTypingUser } from '../state/actions/ui.actions';
 
 @Component({
@@ -56,7 +56,9 @@ export class MessagesComponent {
   typingUsers$ = this.store.select(selectTypingUsers);
   usersCount$ = this.store.select(selectConnectedCount);
   clearAnnouncement = new Subject<boolean>();
-  announcements$: Observable<Announcement[]> = this.store.select(selectAnnouncements);
+  unsubscribe$: Subject<boolean> = new Subject<boolean>();
+  announcements$: Observable<Announcement[]> =
+    this.store.select(selectAnnouncements);
   messages$ = this.store.select(selectAllMessages).pipe(
     tap(() => {
       this.scrollToBottom();
@@ -68,11 +70,13 @@ export class MessagesComponent {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.typingUsers$.pipe(debounceTime(1000)).subscribe((status) => {
-      if (status.length) {
-        this.store.dispatch(removeTypingUser(status.at(status.length - 1)!));
-      }
-    });
+    this.typingUsers$
+      .pipe(debounceTime(1100), takeUntil(this.unsubscribe$))
+      .subscribe((status) => {
+        if (status.length) {
+          this.store.dispatch(removeTypingUser(status.at(status.length - 1)!));
+        }
+      });
   }
 
   scrollToBottom(): void {
@@ -80,5 +84,9 @@ export class MessagesComponent {
       this.messagesContainer.nativeElement.scrollTop =
         this.messagesContainer.nativeElement.scrollHeight;
     } catch (err) {}
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next(true);
   }
 }

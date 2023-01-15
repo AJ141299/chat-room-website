@@ -11,6 +11,10 @@ export const addAnnouncementHelper = (announcements: Announcement[], newAnnounce
   return [...announcements, newAnnouncement]
 }
 
+export const getNewThemeHelper = (currentTheme: string): string => {
+  return currentTheme == "dark" ? "light" : "dark";
+}
+
 export const getOSTheme = () => {
   return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     ? "dark"
