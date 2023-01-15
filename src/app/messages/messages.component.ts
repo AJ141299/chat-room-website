@@ -26,7 +26,7 @@ import { baseUrl } from '../app.component';
     ]),
     trigger('fadeDown', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-10%)' }),
+        style({ opacity: 0, transform: 'translateY(-20%)' }),
         animate(
           '200ms ease',
           style({ opacity: 1, transform: 'translateY(0%)' })
@@ -36,7 +36,7 @@ import { baseUrl } from '../app.component';
         style({ opacity: 1, transform: 'translateY(0%)' }),
         animate(
           '200ms ease',
-          style({ opacity: 1, transform: 'translateY(-20%)' })
+          style({ opacity: 0, transform: 'translateY(-20%)' })
         ),
       ]),
     ]),

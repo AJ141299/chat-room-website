@@ -3,7 +3,7 @@ import * as signalR from "@microsoft/signalr";
 import { Store } from "@ngrx/store";
 import { first, tap } from "rxjs";
 import { baseUrl } from "./app.component";
-import { addAnnouncement, addTypingUser, receiveMessage, removeAnnouncement, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
+import { addAnnouncement, addTypingUser, clearMessages, receiveMessage, removeAnnouncement, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
 import { Message, AppState, TypingStatus, Announcement } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
 
@@ -40,6 +40,7 @@ export class SignalRService {
     this.configureJoiningUsers();
     this.configureConnectedCount();
     this.configureAdminMode();
+    this.configureClearingMessages();
   }
 
   public addUser(username: string) {
@@ -65,6 +66,10 @@ export class SignalRService {
         this.connection.invoke("UserIsTyping", typingStatus);
       })
     ).subscribe();
+  }
+
+  public clearMessages() {
+    this.connection.invoke("ClearMessages");
   }
 
   private configureAdminMode() {
@@ -93,6 +98,12 @@ export class SignalRService {
     this.connection.on('AnnounceUser', (announcement: Announcement) => {
       this.store.dispatch(addAnnouncement({announcement: announcement}));
     });
+  }
+
+  private configureClearingMessages() {
+    this.connection.on("ClearMessages", () => {
+      this.store.dispatch(clearMessages());
+    })
   }
 
   private configureConnectedCount() {

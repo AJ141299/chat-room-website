@@ -14,6 +14,7 @@ import {
   changeTheme,
   setTheme,
   loadMessages,
+  clearMessages,
 } from '../actions/ui.actions';
 import { Message, TypingStatus, UiState } from '../models/models';
 
@@ -40,6 +41,10 @@ export const uiReducer = createReducer(
   on(loadMessages, (state, {messages}) => ({
     ...state,
     messages: messages,
+  })),
+  on(clearMessages, (state) => ({
+    ...state,
+    messages: [],
   })),
   on(setTheme, (state, { theme }) => ({
     ...state,

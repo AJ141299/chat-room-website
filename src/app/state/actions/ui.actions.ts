@@ -16,6 +16,10 @@ export const receiveMessage = createAction(
   props<Message>()
 );
 
+export const clearMessages = createAction(
+  '[All pages] Clear all messages'
+);
+
 export const setTheme = createAction(
   '[All pages] Set Theme',
   props<{theme: string}>()

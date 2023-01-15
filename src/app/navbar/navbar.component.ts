@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, of, Subject, takeUntil, tap } from 'rxjs';
+import { Observable } from 'rxjs';
+import { SignalRService } from '../signalr.service';
 import { changeTheme } from '../state/actions/ui.actions';
 import { logout} from '../state/actions/user.actions';
 import { AppState } from '../state/models/models';
@@ -17,7 +18,11 @@ export class NavbarComponent {
   isLoggedIn$: Observable<boolean> = this.store.select(selectLoginStatus);
 
   constructor(
-    private store: Store<AppState>) {}
+    private store: Store<AppState>, private signalRService: SignalRService) {}
+
+  clearMessages() {
+    this.signalRService.clearMessages();
+  }
 
   changeTheme() {
     this.store.dispatch(changeTheme());
