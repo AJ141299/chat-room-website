@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from './state/app.state';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,

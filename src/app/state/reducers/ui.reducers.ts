@@ -13,6 +13,7 @@ import {
   setConnectedCount,
   changeTheme,
   setTheme,
+  loadMessages,
 } from '../actions/ui.actions';
 import { Message, TypingStatus, UiState } from '../models/models';
 
@@ -35,6 +36,10 @@ export const uiReducer = createReducer(
   on(receiveMessage, (state, message: Message) => ({
     ...state,
     messages: [...state.messages, message],
+  })),
+  on(loadMessages, (state, {messages}) => ({
+    ...state,
+    messages: messages,
   })),
   on(setTheme, (state, { theme }) => ({
     ...state,

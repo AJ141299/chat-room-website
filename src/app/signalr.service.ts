@@ -2,19 +2,17 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { Store } from "@ngrx/store";
 import { first, tap } from "rxjs";
+import { baseUrl } from "./app.component";
 import { addAnnouncement, addTypingUser, receiveMessage, removeAnnouncement, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
 import { Message, AppState, TypingStatus, Announcement } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
-
-const devSignalRUrl: string = "https://localhost:3232/chatHub";
-const prodSignalRUrl: string = "https://chat-room-server20230107234625.azurewebsites.net:443/chatHub";
 
 @Injectable({providedIn: "root"})
 export class SignalRService {
   constructor(private store: Store<AppState>) {}
 
   public connection: signalR.HubConnection = new signalR.HubConnectionBuilder()
-    .withUrl(devSignalRUrl)
+    .withUrl(baseUrl + "/chatHub")
     .withAutomaticReconnect()
     .build();
 

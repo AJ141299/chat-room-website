@@ -6,6 +6,11 @@ export const sendMessage = createAction(
   props<Message>()
 );
 
+export const loadMessages = createAction(
+  '[Messages page] Load Messages',
+  props<{messages: Message[]}>()
+);
+
 export const receiveMessage = createAction(
   '[Messages page] Receive Message',
   props<Message>()

@@ -9,7 +9,9 @@ import {
 } from '../state/selectors/ui.selectors';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { debounceTime, Observable, Subject, takeUntil, tap } from 'rxjs';
-import { removeTypingUser } from '../state/actions/ui.actions';
+import { loadMessages, removeTypingUser } from '../state/actions/ui.actions';
+import { HttpClient } from '@angular/common/http';
+import { baseUrl } from '../app.component';
 
 @Component({
   selector: 'messages',
@@ -64,7 +66,7 @@ export class MessagesComponent {
 
   @ViewChild('messagesContainer') private messagesContainer: ElementRef;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private http: HttpClient) {}
 
   ngOnInit() {
     // clears typing status in the event of target client losing connection and never returning false typing status
@@ -75,6 +77,12 @@ export class MessagesComponent {
           this.store.dispatch(removeTypingUser(status.at(status.length - 1)!));
         }
       });
+
+    this.http
+      .get(baseUrl + '/messages/get-messages')
+      .subscribe((messages: any) => {
+        this.store.dispatch(loadMessages({ messages: messages }));
+      });
   }
 
   ngAfterViewChecked() {
@@ -84,7 +92,10 @@ export class MessagesComponent {
   }
 
   onScroll(event: any) {
-    if (Math.ceil(event.target.offsetHeight + event.target.scrollTop) >= event.target.scrollHeight) {
+    if (
+      Math.ceil(event.target.offsetHeight + event.target.scrollTop) >=
+      event.target.scrollHeight
+    ) {
       this.stickScrollToBottom = true;
     } else {
       this.stickScrollToBottom = false;
