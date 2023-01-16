@@ -1,0 +1,10 @@
+.container {
+  height: 80vh;
+  width: 100%;
+  border-radius: 15px;
+  display: flex;
+  gap: 30px;
+  position: relative;
+  border: 2px solid var(--shadow-color);
+  padding: 30px 40px;
+}

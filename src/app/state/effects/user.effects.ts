@@ -28,7 +28,7 @@ export class UserEffects {
           if (username != '') {
             this.store.dispatch(setLoginStatus({ status: true }));
             this.signalRService.addUser(username);
-            this.router.navigate(['/messages']);
+            this.router.navigate(['/available-rooms']);
           }
         })
       ),

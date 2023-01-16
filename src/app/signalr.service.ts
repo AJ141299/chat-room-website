@@ -4,6 +4,7 @@ import { Store } from "@ngrx/store";
 import { first, tap } from "rxjs";
 import { baseUrl } from "./app.component";
 import { addAnnouncement, addTypingUser, clearMessages, receiveMessage, removeAnnouncement, removeTypingUser, setConnectedCount } from "./state/actions/ui.actions";
+import { updateAvailableUsers } from "./state/actions/user.actions";
 import { Message, AppState, TypingStatus, Announcement } from "./state/models/models";
 import { selectUsername } from "./state/selectors/user.selectors";
 
@@ -41,6 +42,7 @@ export class SignalRService {
     this.configureConnectedCount();
     this.configureAdminMode();
     this.configureClearingMessages();
+    this.configureAvailableUsers();
   }
 
   public addUser(username: string) {
@@ -109,6 +111,12 @@ export class SignalRService {
   private configureConnectedCount() {
     this.connection.on('RefreshConnectedCount', (count: number) => {
       this.store.dispatch(setConnectedCount({count: count}));
+    });
+  }
+
+  private configureAvailableUsers() {
+    this.connection.on('UpdateAvailableUsers', (users: string[]) => {
+      this.store.dispatch(updateAvailableUsers({usernames: users}));
     });
   }
 }

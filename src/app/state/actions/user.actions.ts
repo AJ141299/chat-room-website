@@ -5,6 +5,11 @@ export const setUsername = createAction(
   props<{username: string}>()
 );
 
+export const updateAvailableUsers = createAction(
+  '[All pages] Add available username',
+  props<{usernames: string[]}>()
+);
+
 export const setLoginStatus = createAction(
   '[All pages] Sets logged in status',
   props<{status: boolean}>()

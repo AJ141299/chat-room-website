@@ -12,3 +12,8 @@ export const selectLoginStatus = createSelector(
   selectUserState,
   (state: UserState) => state.isLoggedIn
 );
+
+export const selectAvailableUsers = createSelector(
+  selectUserState,
+  (state: UserState) => state.availableUsers
+);

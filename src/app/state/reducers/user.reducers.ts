@@ -1,10 +1,11 @@
 import { createReducer, on } from "@ngrx/store";
-import { setLoginStatus, setUsername } from "../actions/user.actions";
+import { updateAvailableUsers, setLoginStatus, setUsername } from "../actions/user.actions";
 import { UserState } from "../models/models";
 
 export const initialState: UserState = {
   username: '',
   isLoggedIn: false,
+  availableUsers: [],
 };
 
 export const userReducer = createReducer(
@@ -17,4 +18,8 @@ export const userReducer = createReducer(
     ...state,
     isLoggedIn: status
   })),
+  on(updateAvailableUsers, (state, {usernames}) => ({
+    ...state,
+    availableUsers: usernames
+  }))
 );

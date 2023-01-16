@@ -16,6 +16,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderComponent } from './loader/loader.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { AvailableUserComponent } from './available-user/available-user.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { LoaderComponent } from './loader/loader.component';
     MessagesComponent,
     UserDetailsComponent,
     NotFoundPageComponent,
-    LoaderComponent
+    LoaderComponent,
+    RoomsComponent,
+    AvailableUserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,3 @@
+<div class="container">
+  <available-user *ngFor="let user of (availableUsers$ | async)" [username]="user" ></available-user>
+</div>
