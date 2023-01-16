@@ -61,11 +61,6 @@
   display: inline-block;
   font-size: 32px;
   font-weight: 800;
-  background-image: linear-gradient(
-    to right,
-    var(--logo-gradient-left),
-    var(--logo-gradient-right)
-  );
+  color: var(--logo-color);
   background-clip: text;
-  color: transparent;
 }

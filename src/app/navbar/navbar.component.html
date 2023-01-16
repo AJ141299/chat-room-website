@@ -4,7 +4,13 @@
       <p class="logo-header">Chattly</p>
     </div>
     <div class="nav-item">
-      <button (click)="clearMessages()" class="logout">Clear Messages</button>
+      <button
+        *ngIf="isLoggedIn$ | async"
+        (click)="clearMessages()"
+        class="logout"
+      >
+        Clear Messages
+      </button>
       <button *ngIf="isLoggedIn$ | async" (click)="logout()" class="logout">
         Logout
       </button>
@@ -14,7 +20,7 @@
             *ngIf="(currentTheme$ | async) == 'dark'"
             class="icon material-symbols-outlined"
           >
-          light_mode
+            light_mode
           </span>
           <span
             *ngIf="(currentTheme$ | async) == 'light'"

@@ -40,6 +40,22 @@ import { baseUrl } from '../app.component';
         ),
       ]),
     ]),
+    trigger('fadeUp', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(60%)' }),
+        animate(
+          '200ms ease',
+          style({ opacity: 1, transform: 'translateY(0%)' })
+        ),
+      ]),
+      transition(':leave', [
+        style({ opacity: 1, transform: 'translateY(0%)' }),
+        animate(
+          '200ms ease',
+          style({ opacity: 0, transform: 'translateY(60%)' })
+        ),
+      ]),
+    ]),
     trigger('easeIn', [
       transition(':enter', [
         style({ opacity: 0 }),
@@ -88,7 +104,7 @@ export class MessagesComponent {
   }
 
   ngAfterViewChecked() {
-    if (this.stickScrollToBottom) {
+    if (this.stickScrollToBottom && this.loadingComplete) {
       this.scrollToBottom();
     }
   }
@@ -106,9 +122,14 @@ export class MessagesComponent {
 
   scrollToBottom(): void {
     try {
-      this.messagesContainer.nativeElement.scrollTop =
-        this.messagesContainer.nativeElement.scrollHeight;
-    } catch (err) {}
+      this.messagesContainer.nativeElement.scrollTo({
+        left: 0,
+        top: this.messagesContainer.nativeElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   ngOnDestroy() {

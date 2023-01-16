@@ -7,8 +7,8 @@
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  box-shadow: 1px 1px 4px var(--shadow-color);
   position: relative;
+  border: 1px solid var(--shadow-color);
 }
 
 @media only screen and (max-height: styles.$breakpoint-m) {
@@ -90,6 +90,22 @@
   position: absolute;
   right: 20px;
   top: -20px;
+}
+
+.scroll-down-btn {
+  bottom: 10%;
+  left: 50%;
+  background-color: var(--lighter-bg-color);
+  color: var(--text-secondary-color);
+  border-radius: 20px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 2px var(--shadow-color);
+  cursor: pointer;
 }
 
 /* width */
