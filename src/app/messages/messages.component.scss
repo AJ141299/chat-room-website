@@ -108,6 +108,14 @@
   cursor: pointer;
 }
 
+// TODO: hack to center on smaller screens. Improve it
+@media only screen and (max-height: styles.$breakpoint-m) {
+  .scroll-down-btn {
+    bottom: 15%;
+    left: 45%;
+  }
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
